@@ -71,6 +71,7 @@ class ProductDetailActivity : BaseActivity(R.layout.activity_product_detail) {
     private lateinit var mShareAction:ShareAction//分享
 
 
+
     override fun initData() {
         immersionBar {
             statusBarView(R.id.product_title)
