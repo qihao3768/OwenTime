@@ -91,6 +91,7 @@ class ProductDetailActivity : BaseActivity(R.layout.activity_product_detail) {
             mShareAction.open()
         }
 
+
     mBinding.productTitle.leftView.fastClick {
         finish()
     }
