@@ -112,7 +112,6 @@ class ProductDetailActivity : BaseActivity(R.layout.activity_product_detail) {
                     positionOffset: Float,
                     positionOffsetPixels: Int
                 ) {
-
                 }
 
                 override fun onPageSelected(position: Int) {
