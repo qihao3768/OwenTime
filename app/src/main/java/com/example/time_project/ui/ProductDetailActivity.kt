@@ -1,6 +1,8 @@
 package com.example.time_project.ui
 
 import android.content.Intent
+import android.net.Uri
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +18,7 @@ import com.donkingliang.labels.LabelsView
 import com.drake.brv.utils.setup
 import com.example.time_project.*
 import com.example.time_project.adapter.ImageTitleHolder
+import com.example.time_project.adapter.ProductBannerAdapter
 import com.example.time_project.base.BaseActivity
 import com.example.time_project.base.BasePopWindow
 import com.example.time_project.bean.FlexTagModel
@@ -33,6 +36,9 @@ import com.example.time_project.util.IntentExtra.Companion.iskuName
 import com.example.time_project.util.IntentExtraInt
 import com.example.time_project.util.IntentExtraString
 import com.example.time_project.vm.OwenViewModel
+import com.google.android.exoplayer2.C
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
 import com.gyf.immersionbar.ktx.immersionBar
 import com.umeng.socialize.ShareAction
 import com.umeng.socialize.ShareContent
@@ -41,11 +47,13 @@ import com.umeng.socialize.bean.SHARE_MEDIA
 import com.umeng.socialize.media.UMImage
 import com.youth.banner.adapter.BannerAdapter
 import com.youth.banner.indicator.CircleIndicator
+import com.youth.banner.listener.OnPageChangeListener
 import razerdp.util.animation.AnimationHelper
 import razerdp.util.animation.TranslationConfig
 
 class ProductDetailActivity : BaseActivity(R.layout.activity_product_detail) {
 
+    private lateinit var adapter: ProductBannerAdapter
     private val mBinding by viewBinding (ActivityProductDetailBinding::bind)
 
     private var buyDialog = BasePopWindow(this)
@@ -92,35 +100,40 @@ class ProductDetailActivity : BaseActivity(R.layout.activity_product_detail) {
     }
 
     //初始化顶部banner
+
     private fun initTopBanner(headImage: List<String>, title: String) {
-        mBinding.groupBanner.addBannerLifecycleObserver(this)//添加生命周期观察者
-            .setAdapter(object : BannerAdapter<String, ImageTitleHolder>(headImage) {
-                override fun onCreateHolder(
-                    parent: ViewGroup,
-                    viewType: Int
-                ): ImageTitleHolder {
-                    return ImageTitleHolder(
-                        layoutInflater.inflate(
-                            R.layout.banner_image_title,
-                            parent,
-                            false
-                        )
-                    )
-                }
-
-                override fun onBindView(
-                    holder: ImageTitleHolder,
-                    data: String,
+         adapter=ProductBannerAdapter(this,headImage)
+        mBinding.groupBanner.addBannerLifecycleObserver(this)
+            .addOnPageChangeListener(object :OnPageChangeListener{
+                override fun onPageScrolled(
                     position: Int,
-                    size: Int
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
                 ) {
-                    holder.imageView.load(data)
-//                    holder.title.text = title
+
                 }
 
-            }).start().indicator = CircleIndicator(this)
+                override fun onPageSelected(position: Int) {
+                    if (position!=0){
+                        adapter.stopVideo()
+                    }
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+
+                }
+
+            })//添加生命周期观察者
+            .setAdapter(adapter,false)
+            .start()
+            .isAutoLoop(false)
+            .indicator=CircleIndicator(this)
     }
 
+    override fun onPause() {
+        super.onPause()
+        adapter.stopVideo()
+    }
     /***
      * 显示商品规格
      */
@@ -260,8 +273,8 @@ class ProductDetailActivity : BaseActivity(R.layout.activity_product_detail) {
         }
         viewModel.getDetail(code).observe(this, Observer {
             it?.run {
-                val images:MutableList<String> = mutableListOf(imgHead?:"")
-                initTopBanner(images,name?:"")
+                //val images:MutableList<String> = mutableListOf(imgHead?:"")
+                initTopBanner(img_heads,name?:"")
                 mBinding.groupDetailPic.loadUrl(detail?:"")
                 //价格默认取规格列表的第一条
                 mBinding.tvGoodsPrice.text="￥".plus(sku?.get(0)?.priceActual ?: "")
@@ -334,4 +347,6 @@ class ProductDetailActivity : BaseActivity(R.layout.activity_product_detail) {
             }
         }
     }
+
+
 }

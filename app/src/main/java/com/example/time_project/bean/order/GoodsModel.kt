@@ -40,7 +40,9 @@ data class GoodsDetail(
     @SerializedName("name")
     val name: String? = "",
     @SerializedName("sku")
-    val sku: List<Sku>? = listOf()
+    val sku: List<Sku>? = listOf(),
+    @SerializedName("img_heads")
+    val img_heads: List<String> = listOf()
 )
 
 data class Sku(

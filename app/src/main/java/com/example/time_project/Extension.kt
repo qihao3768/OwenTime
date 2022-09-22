@@ -115,6 +115,7 @@ fun View.fastClick(listener: (view: View) -> Unit) {
     }
 }
 
+
 //fun ViewGroup.checkLogin(msg: String):String{
 //    val userInfo=MMKV.defaultMMKV().decodeParcelable("user",Register::class.java)
 //    return if (userInfo==null){
