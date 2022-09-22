@@ -122,7 +122,6 @@ class ProductDetailActivity : BaseActivity(R.layout.activity_product_detail) {
                 override fun onPageScrollStateChanged(state: Int) {
 
                 }
-
             })//添加生命周期观察者
             .setAdapter(adapter,false)
             .start()
