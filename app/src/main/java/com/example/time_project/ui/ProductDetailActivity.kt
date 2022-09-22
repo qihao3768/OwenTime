@@ -130,6 +130,7 @@ class ProductDetailActivity : BaseActivity(R.layout.activity_product_detail) {
             .indicator=CircleIndicator(this)
     }
 
+
     override fun onPause() {
         super.onPause()
         adapter.stopVideo()
