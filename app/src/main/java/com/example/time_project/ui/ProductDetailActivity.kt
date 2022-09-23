@@ -36,6 +36,7 @@ import com.example.time_project.util.IntentExtra.Companion.iskuName
 import com.example.time_project.util.IntentExtraInt
 import com.example.time_project.util.IntentExtraString
 import com.example.time_project.vm.OwenViewModel
+import com.example.time_project.widget.NumIndicator
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -127,7 +128,7 @@ class ProductDetailActivity : BaseActivity(R.layout.activity_product_detail) {
             .setAdapter(adapter,false)
             .start()
             .isAutoLoop(false)
-            .indicator=CircleIndicator(this)
+            .indicator=NumIndicator(this)
     }
 
 
