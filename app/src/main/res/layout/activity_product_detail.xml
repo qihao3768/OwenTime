@@ -25,8 +25,19 @@
                 android:id="@+id/group_banner"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                app:banner_indicator_gravity="right"
                 app:layout_constraintDimensionRatio="h,1:0.88"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_play"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/umeng_socialize_delete"
+                app:layout_constraintTop_toTopOf="@+id/group_banner"
+                app:layout_constraintBottom_toBottomOf="@+id/group_banner"
+                app:layout_constraintStart_toStartOf="@+id/group_banner"
+                app:layout_constraintEnd_toEndOf="@+id/group_banner"/>
 
             <com.hjq.shape.layout.ShapeConstraintLayout
                 android:id="@+id/layout_goods_price"

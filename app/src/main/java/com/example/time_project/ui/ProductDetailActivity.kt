@@ -106,6 +106,7 @@ class ProductDetailActivity : BaseActivity(R.layout.activity_product_detail) {
 
     private fun initTopBanner(headImage: List<String>, title: String) {
          adapter=ProductBannerAdapter(this,headImage)
+
         mBinding.groupBanner.addBannerLifecycleObserver(this)
             .addOnPageChangeListener(object :OnPageChangeListener{
                 override fun onPageScrolled(
@@ -117,7 +118,10 @@ class ProductDetailActivity : BaseActivity(R.layout.activity_product_detail) {
 
                 override fun onPageSelected(position: Int) {
                     if (position!=0){
+                        mBinding.ivPlay.visibility=View.GONE
                         adapter.stopVideo()
+                    }else{
+                        mBinding.ivPlay.visibility=View.VISIBLE
                     }
                 }
 
@@ -129,6 +133,9 @@ class ProductDetailActivity : BaseActivity(R.layout.activity_product_detail) {
             .start()
             .isAutoLoop(false)
             .indicator=NumIndicator(this)
+        mBinding.ivPlay.setOnClickListener {
+            adapter.startVideo()
+        }
     }
 
 

@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.DetailActivity">
 
+    <com.youth.banner.Banner
+        android:id="@+id/group_banner"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:banner_indicator_gravity="right"
+        app:layout_constraintDimensionRatio="h,1:0.88"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
