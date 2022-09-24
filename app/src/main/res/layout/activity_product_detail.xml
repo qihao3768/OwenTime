@@ -33,7 +33,7 @@
                 android:id="@+id/iv_play"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/umeng_socialize_delete"
+                android:src="@drawable/mexo_controls_play"
                 app:layout_constraintTop_toTopOf="@+id/group_banner"
                 app:layout_constraintBottom_toBottomOf="@+id/group_banner"
                 app:layout_constraintStart_toStartOf="@+id/group_banner"

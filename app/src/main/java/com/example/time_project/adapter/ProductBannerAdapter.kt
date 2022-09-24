@@ -17,7 +17,11 @@ import com.google.android.exoplayer2.MediaItem
 import com.youth.banner.adapter.BannerAdapter
 import java.util.ArrayList
 
-open class ProductBannerAdapter(var context: Context, var mData: List<String>?) :
+open class ProductBannerAdapter(
+    var context: Context,
+    var mData: List<String>?,
+    var isDetail: Boolean = false
+) :
     BannerAdapter<String, RecyclerView.ViewHolder>(mData) {
 
     private lateinit var exoPlayer: ExoPlayer
@@ -57,7 +61,7 @@ open class ProductBannerAdapter(var context: Context, var mData: List<String>?) 
             exoPlayer = ExoPlayer.Builder(context).build()
             exoPlayer.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT
             holder.binding.exoPlayer.player = exoPlayer
-            holder.binding.exoPlayer.useController=false
+            holder.binding.exoPlayer.useController = false
             val uri = Uri.parse(data)
             val item = MediaItem.fromUri(uri)
             exoPlayer.setMediaItem(item)
@@ -66,10 +70,14 @@ open class ProductBannerAdapter(var context: Context, var mData: List<String>?) 
         } else if (holder is ImageHolder) {
             holder.binding.bannerImage.load(data)
         }
-        holder.itemView.setOnClickListener {
-            val intent: Intent = Intent(context, DetailActivity::class.java)
-            intent.putStringArrayListExtra("777", mData as ArrayList<String>?)
-            context.startActivity(intent)
+        if (isDetail) {
+            return
+        } else {
+            holder.itemView.setOnClickListener {
+                val intent: Intent = Intent(context, DetailActivity::class.java)
+                intent.putStringArrayListExtra("777", mData as ArrayList<String>?)
+                context.startActivity(intent)
+            }
         }
 
 
