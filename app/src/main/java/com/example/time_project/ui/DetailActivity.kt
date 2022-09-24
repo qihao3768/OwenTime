@@ -20,7 +20,7 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         immersionBar {
-
+            fitsSystemWindows(true)
         }
         var stringArrayListExtra = intent.getStringArrayListExtra("777")
         stringArrayListExtra?.let { initTopBanner(it) }
